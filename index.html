@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дмитрий & Анастасия — Свадьба</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Marck+Script&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a96e;
+            --gold-light: #e8d5a8;
+            --gold-dark: #a07d3f;
+            --cream: #faf8f4;
+            --dark: #2c2c2c;
+            --text: #4a4a4a;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5efe6 0%, #ede4d8 30%, #e8ddd0 60%, #f0e6d6 100%);
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(201,169,110,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(201,169,110,0.06) 0%, transparent 50%);
+            animation: floatBg 20s ease-in-out infinite;
+        }
+
+        @keyframes floatBg {
+            0%, 100% { transform: translate(0,0) rotate(0deg); }
+            33% { transform: translate(2%,-2%) rotate(1deg); }
+            66% { transform: translate(-1%,1%) rotate(-0.5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .ornate-frame {
+            position: relative;
+            padding: 50px 40px;
+        }
+
+        .ornate-frame::before,
+        .ornate-frame::after {
+            content: '';
+            position: absolute;
+            border: 1px solid var(--gold);
+            opacity: 0.5;
+        }
+
+        .ornate-frame::before {
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 4px;
+        }
+
+        .ornate-frame::after {
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border-radius: 2px;
+        }
+
+        .corner-ornament {
+            position: absolute;
+            width: 50px; height: 50px;
+            opacity: 0.6;
+        }
+
+        .corner-ornament svg { width: 100%; height: 100%; }
+
+        .corner-tl { top: -5px; left: -5px; }
+        .corner-tr { top: -5px; right: -5px; transform: scaleX(-1); }
+        .corner-bl { bottom: -5px; left: -5px; transform: scaleY(-1); }
+        .corner-br { bottom: -5px; right: -5px; transform: scale(-1,-1); }
+
+        .wedding-label {
+            font-weight: 300;
+            font-size: 13px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInDown 1s ease 0.3s forwards;
+        }
+
+        .couple-names {
+            font-family: 'Marck Script', cursive;
+            font-size: clamp(44px, 9vw, 80px);
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease 0.6s forwards;
+            font-variant: normal;
+        }
+
+        .couple-names .amp {
+            display: block;
+            font-size: 0.5em;
+            color: var(--gold);
+            margin: -5px 0;
+        }
+
+        .wedding-date-hero {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--text);
+            margin-top: 25px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px auto;
+            max-width: 300px;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.2s forwards;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .divider-diamond {
+            width: 8px; height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        .couple-photo-section {
+            margin: 35px auto 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.4s forwards;
+        }
+
+        .couple-photo-frame {
+            position: relative;
+            display: inline-block;
+            padding: 15px;
+            background: var(--white);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .couple-photo-frame img {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            min-height: 200px;
+            object-fit: contain;
+            background: #f0ebe3;
+            opacity: 1;
+            border-radius: 4px;
+        }
+
+        .couple-photo-frame::after {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--gold-light);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        /* ===== PARTICLES ===== */
+        .particles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
+        .particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 1s; animation-duration: 9s; }
+        .particle:nth-child(3) { left: 40%; top: 30%; animation-delay: 2s; animation-duration: 6s; }
+        .particle:nth-child(4) { left: 60%; top: 70%; animation-delay: 0.5s; animation-duration: 8s; }
+        .particle:nth-child(5) { left: 80%; top: 40%; animation-delay: 1.5s; animation-duration: 10s; }
+        .particle:nth-child(6) { left: 90%; top: 80%; animation-delay: 3s; animation-duration: 7.5s; }
+        .particle:nth-child(7) { left: 50%; top: 10%; animation-delay: 2.5s; animation-duration: 9.5s; }
+        .particle:nth-child(8) { left: 30%; top: 90%; animation-delay: 0.8s; animation-duration: 6.5s; }
+
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(0) scale(0); }
+            20% { opacity: 0.6; transform: translateY(-20px) scale(1); }
+            80% { opacity: 0.3; transform: translateY(-80px) scale(0.5); }
+            100% { opacity: 0; transform: translateY(-120px) scale(0); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column;
+            align-items: center; gap: 8px;
+            opacity: 0;
+            animation: fadeIn 1s ease 2s forwards;
+            z-index: 5;
+        }
+
+        .scroll-indicator span {
+            font-size: 11px; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--gold); font-weight: 300;
+        }
+
+        .scroll-arrow {
+            width: 20px; height: 20px;
+            border-right: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            transform: rotate(45deg);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: rotate(45deg) translate(0,0); opacity: 0.5; }
+            50% { transform: rotate(45deg) translate(5px,5px); opacity: 1; }
+        }
+
+        /* ===== INVITATION TEXT ===== */
+        .invitation-text {
+            padding: 100px 20px;
+            text-align: center;
+            background: var(--white);
+            position: relative;
+        }
+
+        .invitation-text::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 1px; height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--gold));
+        }
+
+        .section-subtitle {
+            font-weight: 300; font-size: 12px;
+            letter-spacing: 5px; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 25px;
+        }
+
+        .invitation-message {
+            max-width: 650px; margin: 0 auto;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px; font-weight: 400;
+            line-height: 1.8; color: var(--text);
+        }
+
+        .invitation-message .highlight {
+            color: var(--gold-dark);
+            font-style: italic; font-weight: 500;
+        }
+
+        /* ===== COUNTDOWN ===== */
+        .countdown-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f5efe6 0%, #ede4d8 100%);
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px; font-weight: 300;
+            color: var(--dark); margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .countdown {
+            display: flex; justify-content: center;
+            gap: 20px; flex-wrap: wrap;
+            max-width: 600px; margin: 0 auto;
+        }
+
+        .countdown-item {
+            background: var(--white);
+            padding: 25px 20px; min-width: 100px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative; overflow: hidden;
+        }
+
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+        }
+
+        .countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px; font-weight: 600;
+            color: var(--dark); line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 11px; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--gold);
+            margin-top: 8px; font-weight: 400;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery-section {
+            padding: 100px 20px;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center; margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Marck Script', cursive;
+            font-size: clamp(36px, 6vw, 52px);
+            color: var(--dark); margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px; color: var(--text);
+            font-weight: 300; letter-spacing: 1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1050px; margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative; overflow: hidden;
+            border-radius: 6px; background: var(--cream);
+            padding: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 55px rgba(0,0,0,0.12);
+        }
+
+        .gallery-item img {
+            display: block; width: 100%; height: auto;
+            min-height: 250px; max-height: 500px;
+            object-fit: contain; border-radius: 3px;
+            background: #f0ebe3;
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            padding: 15px 5px 5px; text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px; color: var(--text);
+            font-weight: 400; letter-spacing: 1px;
+        }
+
+        /* ===== TIME BLOCK ===== */
+        .time-section {
+            padding: 80px 20px;
+            background: var(--white);
+            text-align: center;
+            position: relative;
+        }
+
+        .time-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 1px; height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--gold));
+        }
+
+        .time-badge {
+            display: inline-block;
+            padding: 35px 50px;
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            position: relative;
+            max-width: 90%;
+        }
+
+        .time-badge::before {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid var(--gold-light);
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        .time-label {
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .time-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 7vw, 56px);
+            font-weight: 300;
+            color: var(--dark);
+            letter-spacing: 3px;
+        }
+
+        .address-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text);
+            margin: 15px 0;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .time-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text);
+            margin-top: 5px;
+        }
+        
+        .beige-heart {
+            color: #d4b896;
+            font-size: 1.2em;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* ===== DRESS CODE ===== */
+        .dresscode-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #f5efe6 0%, #ede4d8 50%, #f0e6d6 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .dresscode-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 1px; height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--gold));
+        }
+
+        .dresscode-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 7vw, 56px);
+            font-weight: 300;
+            color: var(--dark);
+            margin-bottom: 25px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .dresscode-text {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .color-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.1),
+                inset 0 0 0 1px rgba(201,169,110,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+            position: relative;
+        }
+
+        .color-circle:hover {
+            transform: scale(1.15);
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.15),
+                inset 0 0 0 1px rgba(201,169,110,0.5);
+        }
+
+        .color-circle .tooltip {
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .color-circle:hover .tooltip {
+            opacity: 0.7;
+        }
+
+        .inspiration-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .inspiration-photo-frame {
+            display: inline-block;
+            padding: 15px;
+            background: var(--white);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 20px rgba(0,0,0,0.05);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+
+        .inspiration-photo-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: #f0ebe3;
+        }
+
+        .inspiration-photo-frame::after {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--gold-light);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        /* ===== P.S. FLOWER QUEST ===== */
+        .ps-section {
+            padding: 100px 20px;
+            background: var(--white);
+            text-align: center;
+            position: relative;
+        }
+
+        .ps-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 1px; height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--gold));
+        }
+
+        .ps-card {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #f9f6f1 0%, #f3ede4 100%);
+            border-radius: 6px;
+            border: 1px solid var(--gold-light);
+            position: relative;
+        }
+
+        .ps-card::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(201,169,110,0.3);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .ps-label {
+            font-family: 'Marck Script', cursive;
+            font-size: clamp(32px, 6vw, 44px);
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .ps-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .ps-flower-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .ps-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.9;
+            color: var(--text);
+            text-align: left;
+        }
+
+        .ps-text strong {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        .ps-highlight {
+            display: block;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gold-light);
+            font-style: italic;
+            color: var(--gold-dark);
+        }
+
+        /* ===== LEAF DECORATION ===== */
+        .leaf-decoration {
+            display: flex; justify-content: center;
+            margin: 20px 0; opacity: 0.4;
+        }
+
+        .leaf-decoration svg { width: 120px; height: auto; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%);
+            text-align: center; color: var(--white);
+            position: relative; overflow: hidden;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .footer-names {
+            font-family: 'Marck Script', cursive;
+            font-size: clamp(36px, 7vw, 56px);
+            color: var(--gold-light); margin-bottom: 15px;
+        }
+
+        .footer-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px; font-weight: 300;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 40px;
+        }
+
+        .footer-message {
+            max-width: 500px; margin: 0 auto;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px; line-height: 1.8;
+            color: rgba(255,255,255,0.8); font-weight: 300;
+        }
+
+        .footer-hearts {
+            margin-top: 40px; font-size: 24px;
+            color: var(--gold); letter-spacing: 10px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .ornate-frame { padding: 40px 20px; }
+            .corner-ornament { width: 35px; height: 35px; }
+            .countdown-item { min-width: 70px; padding: 20px 15px; }
+            .countdown-number { font-size: 32px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .couple-photo-frame img { max-width: 280px; }
+            .color-circle { width: 45px; height: 45px; }
+            .color-palette { gap: 18px; }
+            .inspiration-photo-frame { max-width: 320px; padding: 10px; }
+            .ps-card { padding: 35px 25px; }
+            .time-badge { padding: 30px 30px; }
+            .address-text { font-size: 12px; }
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            width: 44px; height: 44px;
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .back-to-top.show { opacity: 1; }
+        .back-to-top:hover { background: var(--gold); color: var(--white); }
+
+        /* ===== MUSIC BUTTON ===== */
+        .music-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(201,169,110,0.25);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .music-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            animation: musicPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(201,169,110,0.25); }
+            50% { box-shadow: 0 4px 25px rgba(201,169,110,0.6); }
+        }
+
+        /* ===== FALLBACK PLACEHOLDER ===== */
+        .img-error-msg {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            background: #fff;
+            border: 2px dashed var(--gold-light);
+            border-radius: 3px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px; color: var(--gold-dark);
+            text-align: center; padding: 20px;
+            width: 100%;
+        }
+        .img-error-msg::before {
+            content: '📷';
+            font-size: 40px;
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== MUSIC BUTTON ===== -->
+    <button id="music-btn" class="music-btn" title="Включить музыку">🎵</button>
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="particles">
+            <div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="ornate-frame">
+                <div class="corner-ornament corner-tl">
+                    <svg viewBox="0 0 60 60" fill="none">
+                        <path d="M5 55 L5 5 L55 5" stroke="#c9a96e" stroke-width="0.8"/>
+                        <path d="M5 40 Q5 55 20 55" stroke="#c9a96e" stroke-width="0.5"/>
+                        <path d="M20 5 Q5 5 5 20" stroke="#c9a96e" stroke-width="0.5"/>
+                        <circle cx="15" cy="15" r="2" fill="#c9a96e" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="corner-ornament corner-tr">
+                    <svg viewBox="0 0 60 60" fill="none">
+                        <path d="M5 55 L5 5 L55 5" stroke="#c9a96e" stroke-width="0.8"/>
+                        <path d="M5 40 Q5 55 20 55" stroke="#c9a96e" stroke-width="0.5"/>
+                        <path d="M20 5 Q5 5 5 20" stroke="#c9a96e" stroke-width="0.5"/>
+                        <circle cx="15" cy="15" r="2" fill="#c9a96e" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="corner-ornament corner-bl">
+                    <svg viewBox="0 0 60 60" fill="none">
+                        <path d="M5 55 L5 5 L55 5" stroke="#c9a96e" stroke-width="0.8"/>
+                        <path d="M5 40 Q5 55 20 55" stroke="#c9a96e" stroke-width="0.5"/>
+                        <path d="M20 5 Q5 5 5 20" stroke="#c9a96e" stroke-width="0.5"/>
+                        <circle cx="15" cy="15" r="2" fill="#c9a96e" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="corner-ornament corner-br">
+                    <svg viewBox="0 0 60 60" fill="none">
+                        <path d="M5 55 L5 5 L55 5" stroke="#c9a96e" stroke-width="0.8"/>
+                        <path d="M5 40 Q5 55 20 55" stroke="#c9a96e" stroke-width="0.5"/>
+                        <path d="M20 5 Q5 5 5 20" stroke="#c9a96e" stroke-width="0.5"/>
+                        <circle cx="15" cy="15" r="2" fill="#c9a96e" opacity="0.5"/>
+                    </svg>
+                </div>
+
+                <div class="wedding-label">Приглашение на свадьбу</div>
+
+                <div class="couple-names">
+                    Дмитрий
+                    <span class="amp">&</span>
+                    Анастасия
+                </div>
+
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-diamond"></div>
+                    <div class="divider-line"></div>
+                </div>
+
+                <div class="wedding-date-hero">21 · 08 · 2026</div>
+
+                <div class="couple-photo-section">
+                    <div class="couple-photo-frame">
+                        <img
+                            src="img/couple.jpg"
+                            alt="Дмитрий и Анастасия"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        >
+                        <div class="img-error-msg">Фото молодожёнов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Подробнее</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ===== INVITATION ===== -->
+    <section class="invitation-text">
+        <div class="reveal">
+            <div class="section-subtitle">Дорогие гости</div>
+            <div class="leaf-decoration">
+                <svg viewBox="0 0 200 40" fill="none">
+                    <path d="M0 20 Q50 0 100 20 Q150 40 200 20" stroke="#c9a96e" stroke-width="0.8"/>
+                    <path d="M60 20 Q80 5 100 20 Q120 35 140 20" stroke="#c9a96e" stroke-width="0.5"/>
+                    <circle cx="100" cy="20" r="3" fill="#c9a96e"/>
+                </svg>
+            </div>
+            <p class="invitation-message">
+                С большой радостью приглашаем Вас разделить с нами
+                <span class="highlight">самый важный и счастливый день</span>
+                в нашей жизни — день, когда мы становимся семьёй.
+                <br><br>
+                Ваше присутствие сделает этот день ещё более
+                <span class="highlight">незабываемым и тёплым</span>.
+            </p>
+            <div class="leaf-decoration" style="margin-top:30px;">
+                <svg viewBox="0 0 200 40" fill="none">
+                    <path d="M0 20 Q50 40 100 20 Q150 0 200 20" stroke="#c9a96e" stroke-width="0.8"/>
+                    <path d="M60 20 Q80 35 100 20 Q120 5 140 20" stroke="#c9a96e" stroke-width="0.5"/>
+                    <circle cx="100" cy="20" r="3" fill="#c9a96e"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COUNTDOWN ===== -->
+    <section class="countdown-section">
+        <div class="reveal">
+            <div class="section-subtitle">До торжества осталось</div>
+            <h2 class="countdown-title">Отсчёт счастливых дней</h2>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">---</div>
+                    <div class="countdown-label">Дней</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">--</div>
+                    <div class="countdown-label">Часов</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">--</div>
+                    <div class="countdown-label">Минут</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">--</div>
+                    <div class="countdown-label">Секунд</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery-section">
+        <div class="section-title reveal">
+            <div class="section-subtitle">Место проведения</div>
+            <h2>Наша локация</h2>
+            <p>Красивое место для самого важного дня</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <img src="img/location.png" alt="Озеро Шап — локация"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="img-error-msg">🌿 Фото локации</div>
+                <div class="gallery-caption">🌿 Озеро Шап — локация</div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="img/hall.jpg" alt="Помещение для торжества"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="img-error-msg">🏛 Фото зала</div>
+                <div class="gallery-caption">🏛 Помещение для торжества</div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="img/territory.jpg" alt="Территория площадки"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="img-error-msg">🌳 Фото территории</div>
+                <div class="gallery-caption">🌳 Территория площадки</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TIME ===== -->
+    <section class="time-section">
+        <div class="reveal">
+            <div class="leaf-decoration">
+                <svg viewBox="0 0 200 40" fill="none">
+                    <path d="M0 20 Q50 0 100 20 Q150 40 200 20" stroke="#c9a96e" stroke-width="0.8"/>
+                    <path d="M60 20 Q80 5 100 20 Q120 35 140 20" stroke="#c9a96e" stroke-width="0.5"/>
+                    <circle cx="100" cy="20" r="3" fill="#c9a96e"/>
+                </svg>
+            </div>
+            <div class="time-badge">
+                <div class="time-label">Сбор гостей</div>
+                <div class="time-value">17:00</div>
+                <div class="address-text">
+                    Марий Эл, г. Йошкар-Ола, пос. Шап,<br>
+                    озеро Шап, ул. Санаторная, д. 5
+                </div>
+                <div class="time-subtitle">
+                    Ждём Вас <span class="beige-heart">♥</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DRESS CODE ===== -->
+    <section class="dresscode-section">
+        <div class="reveal">
+            <div class="dresscode-heading">Dress Code</div>
+
+            <div class="leaf-decoration">
+                <svg viewBox="0 0 200 40" fill="none">
+                    <path d="M0 20 Q50 0 100 20 Q150 40 200 20" stroke="#c9a96e" stroke-width="0.8"/>
+                    <path d="M60 20 Q80 5 100 20 Q120 35 140 20" stroke="#c9a96e" stroke-width="0.5"/>
+                    <circle cx="100" cy="20" r="3" fill="#c9a96e"/>
+                </svg>
+            </div>
+
+            <p class="dresscode-text">
+                Нам будет приятно, если Вы поддержите стилистику нашей свадьбы
+                и используете в своих нарядах предложенные цвета
+            </p>
+
+            <div class="color-palette">
+                <div class="color-circle" style="background: #2c2c2c;">
+                    <span class="tooltip">Чёрный</span>
+                </div>
+                <div class="color-circle" style="background: #6B4226;">
+                    <span class="tooltip">Коричневый</span>
+                </div>
+                <div class="color-circle" style="background: #A67C52;">
+                    <span class="tooltip">Светло-коричневый</span>
+                </div>
+                <div class="color-circle" style="background: #D4B896;">
+                    <span class="tooltip">Бежевый</span>
+                </div>
+                <div class="color-circle" style="background: #EDE0D4;">
+                    <span class="tooltip">Светло-бежевый</span>
+                </div>
+            </div>
+
+            <div class="inspiration-label">Вдохновение для ваших образов</div>
+
+            <div class="inspiration-photo-frame">
+                <img src="img/inspiration.jpg" alt="Вдохновение для ваших образов"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="img-error-msg">🎨 Фото-вдохновение</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== P.S. FLOWER QUEST ===== -->
+    <section class="ps-section">
+        <div class="reveal">
+            <div class="ps-card">
+                <div class="ps-label">P.S.</div>
+                <div class="ps-flower-icon">💐</div>
+                <div class="ps-subtitle">Цветочный квест</div>
+                <div class="ps-text">
+                    Друзья, мы решили отказаться от «моря» цветов в день свадьбы,
+                    чтобы они не завяли, пока мы будем в медовом месяце.
+                    Вместо этого мы объявляем <strong>год цветочного настроения!</strong>
+
+                    <span class="ps-highlight">
+                        Если вы планировали подарить нам букет — приберегите этот порыв.
+                        Мы будем очень рады получить от вас цветы через месяц, два
+                        или даже полгода после свадьбы. Давайте растянем праздник
+                        на <strong>365 дней</strong>! 🌸
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <section class="footer-section">
+        <div class="reveal">
+            <div class="footer-names">Дмитрий & Анастасия</div>
+            <div class="footer-date">21 августа 2026</div>
+            <p class="footer-message">
+                Мы будем счастливы видеть вас<br>
+                среди тех, кто разделит с нами<br>
+                эту радость!
+            </p>
+            <div class="footer-hearts">♥ ♥ ♥</div>
+        </div>
+    </section>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <script>
+        // ===== COUNTDOWN =====
+        function updateCountdown() {
+            const wedding = new Date('2026-08-21T10:00:00');
+            const now = new Date();
+            const diff = wedding - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ===== SCROLL REVEAL =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ===== BACK TO TOP =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 400);
+        });
+
+        // ===== PARALLAX on hero =====
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.scrollY;
+            if (scrolled < window.innerHeight) {
+                hero.style.backgroundPositionY = scrolled * 0.3 + 'px';
+            }
+        });
+
+        // ===== MUSIC PLAYER =====
+        const musicBtn = document.getElementById('music-btn');
+        const bgMusic = document.getElementById('bg-music');
+        let musicPlaying = false;
+
+        bgMusic.volume = 0.4;
+
+        musicBtn.addEventListener('click', () => {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🎵';
+                musicBtn.classList.remove('playing');
+                musicPlaying = false;
+            } else {
+                bgMusic.play()
+                    .then(() => {
+                        musicBtn.textContent = '🔇';
+                        musicBtn.classList.add('playing');
+                        musicPlaying = true;
+                    })
+                    .catch(() => {});
+            }
+        });
+
+        // Автозапуск при первом взаимодействии
+        document.addEventListener('click', () => {
+            if (!musicPlaying) {
+                bgMusic.play()
+                    .then(() => {
+                        musicBtn.textContent = '🔇';
+                        musicBtn.classList.add('playing');
+                        musicPlaying = true;
+                    })
+                    .catch(() => {});
+            }
+        }, { once: true });
+
+        document.addEventListener('touchstart', () => {
+            if (!musicPlaying) {
+                bgMusic.play()
+                    .then(() => {
+                        musicBtn.textContent = '🔇';
+                        musicBtn.classList.add('playing');
+                        musicPlaying = true;
+                    })
+                    .catch(() => {});
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
+
+
